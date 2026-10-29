@@ -1,6 +1,6 @@
 <div fxLayout="row" fxLayoutAlign="center">
     <div fxLayout="column" fxFlex="1000px">
-        <form class="mt-60" #buscarForm="ngForm">
+        <form class="mt-60" #buscarForm="ngForm" (ngSubmit)="pesquisa()">
             <mat-card appearance="outlined">
                 <mat-card-header>
                     <mat-card-title>Consulta</mat-card-title>
@@ -10,7 +10,7 @@
                         <div fxLayout="column" fxFlex="950px">
                             <mat-form-field>
                                 <mat-label>Nome:</mat-label>
-                                <input matInput placeholder="ex: José"/>
+                                <input name="nomeBusca" [(ngModel)]="nomeBusca" matInput placeholder="ex: José"/>
                             </mat-form-field>
                         </div>
                     </div>
@@ -63,6 +63,17 @@
                     <ng-container matColumnDef="email">
                         <th mat-header-cell *matHeaderCellDef>Email</th>
                         <td mat-cell *matCellDef="let cliente">{{ cliente.email }}</td>
+                    </ng-container>
+
+                    <!-- Ações da Tabela -->
+                    <ng-container matColumnDef="acoes">
+                        <th mat-header-cell *matHeaderCellDef></th>
+                        <td mat-cell *matCellDef="let cliente">
+                            <button type="button" mat-button (click)="preparaEditar(cliente.id)">
+                                <mat-icon fontIcon="edit"></mat-icon>
+                                Editar
+                            </button>
+                        </td>
                     </ng-container>
 
                     <tr mat-header-row *matHeaderRowDef="colunasTable"></tr>
